@@ -1,14 +1,222 @@
+enum PayEnum {
+    C
+    D
+    N
+}
+
+enum AboDedEnum {
+    Ab
+    De
+}
+
+enum AboDedStateEnum {
+    Deb
+    Act
+}
+
+enum WAndLEnum {
+    Gas
+    Gan
+}
+
 type Client {
     _id: ID!
     name: String!
+    contact: [Contact]
     createdAt: String!
     updatedAt: String
+    note: String
+}
+
+type Contact {
+    _id: ID!
+    phone: String
+    email: String
+    desc: String
+}
+
+type Contracts {
+    _id: ID!
+    refId: String!
+    location: String
+    antenaModel: String
+    ipAddress: String
+    parentMk: String
+    billingData: Billing
+    service: String
+    servicePrice: Number
+    router: Router
+    latLong: LatLong
+    createdAt: String
+    updatedAt: String
+}
+
+type Billing {
+    address: String
+    ciRif: String
+    name: String
+}
+
+type Router {
+    pass: String
+    adminPass: String
+    adminUser: String
+}
+
+type LatLong {
+    lat: String
+    lon: String
+}
+
+type MonthPayments {
+    _id: ID!
+    refId: String
+    payments: [Payments]
+}
+
+type Payments {
+    year: String
+    month: Months
+}
+
+type Months {
+    ene: PayEnum
+    feb: PayEnum
+    mar: PayEnum
+    abr: PayEnum
+    may: PayEnum
+    jun: PayEnum
+    jul: PayEnum
+    ago: PayEnum
+    sep: PayEnum
+    oct: PayEnum
+    nov: PayEnum
+    dec: PayEnum
+}
+
+type AboDed {
+    _id: ID!
+    refId: String
+    amount: Number
+    type: AboDedEnum
+    desc: String
+    state: AboDedStateEnum
+    createdAt: String
+    updatedAt: String
+}
+
+type WAndL {
+    _id: ID!
+    desc: String
+    amount: Number
+    createdAt: String
+    type: WAndLEnum
+}
+
+type FinancialState {
+    _id: ID!
+    state: Number
+}
+
+type Tags {
+    _id: ID!
+    tagName: String!
 }
 
 input ClientInput {
     name: String!
+    contact: ContactInput
     createdAt: String!
     updatedAt: String
+    note: String
+}
+
+input ContactInput {
+    phone: String
+    email: String
+    desc: String
+}
+
+input ContractsInput {
+    refId: String!
+    location: String
+    antenaModel: String
+    ipAddress: String
+    parentMk: String
+    billingData: BillingInput
+    service: String
+    servicePrice: Number
+    router: RouterInput!
+    latLong: LatLongInput
+    createdAt: String!
+    updatedAt: String
+}
+
+input BillingInput {
+    address: String
+    ciRif: String
+    name: String
+}
+
+input RouterInput {
+    pass: String
+    adminPass: String
+    adminUser: String
+}
+
+input LatLongInput {
+    lat: String!
+    lon: String!
+}
+
+input MonthPaymentsInput {
+    refId: ID!
+    payments: PaymentsInput
+}
+
+input PaymentsInput {
+    year: String
+    month: MonthsInput
+}
+
+input MonthsInput {
+    ene: PayEnum
+    feb: PayEnum
+    mar: PayEnum
+    abr: PayEnum
+    may: PayEnum
+    jun: PayEnum
+    jul: PayEnum
+    ago: PayEnum
+    sep: PayEnum
+    oct: PayEnum
+    nov: PayEnum
+    dec: PayEnum
+}
+
+input AboDedInput {
+    refId: String
+    amount: Number
+    type: AboDedEnum
+    desc: String
+    state: AboDedStateEnum
+    createdAt: String
+    updatedAt: String
+}
+
+input WAndLInput {
+    desc: String
+    amount: Number
+    createdAt: String
+    type: WAndLEnum
+}
+
+input FinancialStateInput {
+    state: Number
+}
+
+input TagsInput {
+    TagName: String
 }
 
 type Query {
