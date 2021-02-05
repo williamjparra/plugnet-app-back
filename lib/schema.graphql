@@ -1,0 +1,26 @@
+type Client {
+    _id: ID!
+    name: String!
+    createdAt: String!
+    updatedAt: String
+}
+
+input ClientInput {
+    name: String!
+    createdAt: String!
+    updatedAt: String
+}
+
+type Query {
+    "devuelve los clientes"
+    getClients: [Client]
+    "retorna un cliente en especifico"
+    getClient(id: ID!): Client 
+}
+
+type Mutation {
+    "Crea un cliente"
+    createClient(input: ClientInput!): Client
+    "edita un cliente"
+    editClient(_id: ID!, input: ClientInput): Client
+}
