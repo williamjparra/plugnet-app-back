@@ -223,7 +223,29 @@ type Query {
     "devuelve los clientes"
     getClients: [Client]
     "retorna un cliente en especifico"
-    getClient(id: ID!): Client 
+    getClient(id: ID!): Client
+    "retorna todos los contratos"
+    getContracts: [Contracts]
+    "devuelve un contrato en especifico que tiene una relacion con un cliente"
+    getContract(id: ID!): Contracts
+    "devuelve todos los esquemas de pagos mensuales"
+    getMonthPayments: [MonthPayments]
+    "devuelve un pago mensual en relacion con un contrato"
+    getMonthPayment(id: ID!): MonthPayments
+    "devuelve todos los abonos y deudas"
+    getAboDeds: [AboDed]
+    "retorna todos los abonos y deudas de un cliente"
+    getAboDed(id: ID!): AboDed
+    "retorna las ganancias y gastos de la red"
+    getWandLs: [WAndL]
+    "retoran una ganancia/gasto"
+    getWandL(id: ID!): WAndL
+    "nos reatorna el dinero total de la empresa al momento"
+    getFinancialState: [FinancialState]
+    "retorna los tags de gastos"
+    getTags: [Tags]
+    "retorna un tag en especifico"
+    getTag(id: ID!): Tags
 }
 
 type Mutation {
@@ -231,4 +253,28 @@ type Mutation {
     createClient(input: ClientInput!): Client
     "edita un cliente"
     editClient(_id: ID!, input: ClientInput): Client
+    "crea un contrato"
+    createContract(input: ContractsInput): Contracts
+    "edita un contrato"
+    editContract(id: ID!, input: ContractsInput): Contracts
+    "crea un pago mensual"
+    createMonthPayment(input: MonthPaymentsInput): MonthPayments
+    "edita un pago mensual"
+    editMonthPayment(id: ID!, input: MonthPaymentsInput): MonthPayments
+    "creat un abono o una deuda"
+    createAboDed(input: AboDedInput): AboDed
+    "edita un abono o una deuda"
+    editAboDed(id: ID!, input: AboDedInput): AboDed
+    "crea una ganancia o un gasto"
+    createWandL(input: WAndLInput): WAndL
+    "edita un gasto o una ganancia"
+    editWandL(id: ID!, input: WAndLInput): WAndL
+    "crea el estado finaciero solo se debe utilizar una vez para no crear varios sino un valor unico"
+    createFinancialState(input: FinancialStateInput): FinancialState
+    "edita el estado finaciero"
+    editFinancialState(id: ID!, input: FinancialStateInput): FinancialState
+    "crea un tag"
+    createTag(input: TagsInput): Tags
+    "edita un tag"
+    editTag(id: ID!, input: TagsInput): Tags
 }
