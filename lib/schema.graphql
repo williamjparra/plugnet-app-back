@@ -44,7 +44,7 @@ type Contracts {
     parentMk: String
     billingData: Billing
     service: String
-    servicePrice: Number
+    servicePrice: Float
     router: Router
     latLong: LatLong
     createdAt: String
@@ -97,7 +97,7 @@ type Months {
 type AboDed {
     _id: ID!
     refId: String
-    amount: Number
+    amount: Float
     type: AboDedEnum
     desc: String
     state: AboDedStateEnum
@@ -108,14 +108,14 @@ type AboDed {
 type WAndL {
     _id: ID!
     desc: String
-    amount: Number
+    amount: Float
     createdAt: String
     type: WAndLEnum
 }
 
 type FinancialState {
     _id: ID!
-    state: Number
+    state: Float
 }
 
 type Tags {
@@ -145,7 +145,7 @@ input ContractsInput {
     parentMk: String
     billingData: BillingInput
     service: String
-    servicePrice: Number
+    servicePrice: Float
     router: RouterInput!
     latLong: LatLongInput
     createdAt: String!
@@ -196,7 +196,7 @@ input MonthsInput {
 
 input AboDedInput {
     refId: String
-    amount: Number
+    amount: Float
     type: AboDedEnum
     desc: String
     state: AboDedStateEnum
@@ -206,13 +206,13 @@ input AboDedInput {
 
 input WAndLInput {
     desc: String
-    amount: Number
+    amount: Float
     createdAt: String
     type: WAndLEnum
 }
 
 input FinancialStateInput {
-    state: Number
+    state: Float
 }
 
 input TagsInput {
@@ -256,25 +256,25 @@ type Mutation {
     "crea un contrato"
     createContract(input: ContractsInput): Contracts
     "edita un contrato"
-    editContract(id: ID!, input: ContractsInput): Contracts
+    editContract(_id: ID!, input: ContractsInput): Contracts
     "crea un pago mensual"
     createMonthPayment(input: MonthPaymentsInput): MonthPayments
     "edita un pago mensual"
-    editMonthPayment(id: ID!, input: MonthPaymentsInput): MonthPayments
+    editMonthPayment(_id: ID!, input: MonthPaymentsInput): MonthPayments
     "creat un abono o una deuda"
     createAboDed(input: AboDedInput): AboDed
     "edita un abono o una deuda"
-    editAboDed(id: ID!, input: AboDedInput): AboDed
+    editAboDed(_id: ID!, input: AboDedInput): AboDed
     "crea una ganancia o un gasto"
     createWandL(input: WAndLInput): WAndL
     "edita un gasto o una ganancia"
-    editWandL(id: ID!, input: WAndLInput): WAndL
+    editWandL(_id: ID!, input: WAndLInput): WAndL
     "crea el estado finaciero solo se debe utilizar una vez para no crear varios sino un valor unico"
     createFinancialState(input: FinancialStateInput): FinancialState
     "edita el estado finaciero"
-    editFinancialState(id: ID!, input: FinancialStateInput): FinancialState
+    editFinancialState(_id: ID!, input: FinancialStateInput): FinancialState
     "crea un tag"
     createTag(input: TagsInput): Tags
     "edita un tag"
-    editTag(id: ID!, input: TagsInput): Tags
+    editTag(_id: ID!, input: TagsInput): Tags
 }
