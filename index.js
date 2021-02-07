@@ -26,7 +26,7 @@ app.use('/api', graphqlHTTP({
 }))
 
 app.use('/', (req, res) => {
-    res.send('hola diego voce eri gei?')
+    res.send('hola como estas esta es la ruta raiz')
 })
 
 app.listen(port, () => {
