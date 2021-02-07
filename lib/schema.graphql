@@ -26,6 +26,7 @@ type Client {
     createdAt: String!
     updatedAt: String
     note: String
+    status: Boolean
 }
 
 type Contact {
@@ -52,9 +53,9 @@ type Contracts {
 }
 
 type Billing {
-    address: String
-    ciRif: String
-    name: String
+    address: String!
+    ciRif: String!
+    name: String!
 }
 
 type Router {
@@ -129,6 +130,7 @@ input ClientInput {
     createdAt: String!
     updatedAt: String
     note: String
+    status: Boolean 
 }
 
 input ContactInput {
