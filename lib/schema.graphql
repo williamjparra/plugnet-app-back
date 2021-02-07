@@ -22,7 +22,7 @@ enum WAndLEnum {
 type Client {
     _id: ID!
     name: String!
-    contact: [Contact]
+    contact: Contact
     createdAt: String!
     updatedAt: String
     note: String
@@ -30,7 +30,6 @@ type Client {
 }
 
 type Contact {
-    _id: ID!
     phone: String
     email: String
     desc: String
@@ -225,19 +224,21 @@ type Query {
     "devuelve los clientes"
     getClients: [Client]
     "retorna un cliente en especifico"
-    getClient(id: ID!): Client
+    getClient(_id: ID!): Client
     "retorna todos los contratos"
     getContracts: [Contracts]
+    "devuelve un contrato para ser editado"
+    getContract(_id: ID!): Contracts
     "devuelve un contrato en especifico que tiene una relacion con un cliente"
-    getContract(id: ID!): Contracts
+    getContractRef(refId: String!): Contracts
     "devuelve todos los esquemas de pagos mensuales"
     getMonthPayments: [MonthPayments]
     "devuelve un pago mensual en relacion con un contrato"
-    getMonthPayment(id: ID!): MonthPayments
+    getMonthPayment(refId: String): MonthPayments
     "devuelve todos los abonos y deudas"
     getAboDeds: [AboDed]
     "retorna todos los abonos y deudas de un cliente"
-    getAboDed(id: ID!): AboDed
+    getAboDed(refId: String!): AboDed
     "retorna las ganancias y gastos de la red"
     getWandLs: [WAndL]
     "retoran una ganancia/gasto"
