@@ -5,6 +5,7 @@ const { readFileSync } = require('fs')
 const { makeExecutableSchema } = require('graphql-tools')
 const { join } = require('path')
 const resolvers = require('./lib/resolvers')
+const cors = require('Cors')
 
 //importar variables de entorno
 const {
@@ -18,6 +19,10 @@ const port =  PORT || 4050
 const typeDefs = readFileSync(join(__dirname, 'lib', 'schema.graphql'), 'utf-8')
 
 const schema = makeExecutableSchema({ typeDefs, resolvers })
+
+//declaramos los middlewares
+
+app.use(cors())
 
 app.use('/api', graphqlHTTP({
     schema: schema,
