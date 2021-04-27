@@ -1,283 +1,283 @@
 enum PayEnum {
-    C
-    D
-    N
+  C
+  D
+  N
 }
 
 enum AboDedEnum {
-    Ab
-    De
+  Ab
+  De
 }
 
 enum AboDedStateEnum {
-    Deb
-    Act
+  Deb
+  Act
 }
 
 enum WAndLEnum {
-    Gas
-    Gan
+  Gas
+  Gan
 }
 
 type Client {
-    _id: ID!
-    name: String!
-    contact: Contact
-    createdAt: String!
-    updatedAt: String
-    note: String
-    status: Boolean
+  _id: ID!
+  name: String!
+  contact: Contact
+  createdAt: String!
+  updatedAt: String
+  note: String
+  status: Boolean
 }
 
 type Contact {
-    phone: String
-    email: String
-    desc: String
+  phone: String
+  email: String
+  desc: String
 }
 
 type Contracts {
-    _id: ID!
-    refId: String!
-    location: String
-    antenaModel: String
-    ipAddress: String
-    parentMk: String
-    billingData: Billing
-    service: String
-    servicePrice: Float
-    router: Router
-    latLong: LatLong
-    createdAt: String
-    updatedAt: String
+  _id: ID!
+  refId: String!
+  location: String
+  antenaModel: String
+  ipAddress: String
+  parentMk: String
+  billingData: Billing
+  service: String
+  servicePrice: Float
+  router: Router
+  latLong: LatLong
+  createdAt: String
+  updatedAt: String
 }
 
 type Billing {
-    address: String!
-    ciRif: String!
-    name: String!
+  address: String!
+  ciRif: String!
+  name: String!
 }
 
 type Router {
-    pass: String
-    adminPass: String
-    adminUser: String
+  pass: String
+  adminPass: String
+  adminUser: String
 }
 
 type LatLong {
-    lat: String
-    lon: String
+  lat: String
+  lon: String
 }
 
 type MonthPayments {
-    _id: ID!
-    refId: String
-    payments: [Payments]
+  _id: ID!
+  refId: String
+  payments: [Payments]
 }
 
 type Payments {
-    year: String
-    month: Months
+  year: String
+  month: Months
 }
 
 type Months {
-    ene: PayEnum
-    feb: PayEnum
-    mar: PayEnum
-    abr: PayEnum
-    may: PayEnum
-    jun: PayEnum
-    jul: PayEnum
-    ago: PayEnum
-    sep: PayEnum
-    oct: PayEnum
-    nov: PayEnum
-    dec: PayEnum
+  ene: PayEnum
+  feb: PayEnum
+  mar: PayEnum
+  abr: PayEnum
+  may: PayEnum
+  jun: PayEnum
+  jul: PayEnum
+  ago: PayEnum
+  sep: PayEnum
+  oct: PayEnum
+  nov: PayEnum
+  dec: PayEnum
 }
 
 type AboDed {
-    _id: ID!
-    refId: String
-    amount: Float
-    type: AboDedEnum
-    desc: String
-    state: AboDedStateEnum
-    createdAt: String
-    updatedAt: String
+  _id: ID!
+  refId: String
+  amount: Float
+  type: AboDedEnum
+  desc: String
+  state: AboDedStateEnum
+  createdAt: String
+  updatedAt: String
 }
 
 type WAndL {
-    _id: ID!
-    desc: String
-    amount: Float
-    createdAt: String
-    type: WAndLEnum
+  _id: ID!
+  desc: String
+  amount: Float
+  createdAt: String
+  type: WAndLEnum
 }
 
 type FinancialState {
-    _id: ID!
-    state: Float
+  _id: ID!
+  state: Float
 }
 
 type Tags {
-    _id: ID!
-    tagName: String!
+  _id: ID!
+  tagName: String!
 }
 
 input ClientInput {
-    name: String!
-    contact: ContactInput
-    createdAt: String!
-    updatedAt: String
-    note: String
-    status: Boolean 
+  name: String!
+  contact: ContactInput
+  createdAt: String!
+  updatedAt: String
+  note: String
+  status: Boolean
 }
 
 input ContactInput {
-    phone: String
-    email: String
-    desc: String
+  phone: String
+  email: String
+  desc: String
 }
 
 input ContractsInput {
-    refId: String!
-    location: String
-    antenaModel: String
-    ipAddress: String
-    parentMk: String
-    billingData: BillingInput
-    service: String
-    servicePrice: Float
-    router: RouterInput!
-    latLong: LatLongInput
-    createdAt: String!
-    updatedAt: String
+  refId: String!
+  location: String
+  antenaModel: String
+  ipAddress: String
+  parentMk: String
+  billingData: BillingInput
+  service: String
+  servicePrice: Float
+  router: RouterInput!
+  latLong: LatLongInput
+  createdAt: String!
+  updatedAt: String
 }
 
 input BillingInput {
-    address: String
-    ciRif: String
-    name: String
+  address: String
+  ciRif: String
+  name: String
 }
 
 input RouterInput {
-    pass: String
-    adminPass: String
-    adminUser: String
+  pass: String
+  adminPass: String
+  adminUser: String
 }
 
 input LatLongInput {
-    lat: String!
-    lon: String!
+  lat: String!
+  lon: String!
 }
 
 input MonthPaymentsInput {
-    refId: ID!
-    payments: PaymentsInput
+  refId: ID!
+  payments: PaymentsInput
 }
 
 input PaymentsInput {
-    year: String
-    month: MonthsInput
+  year: String
+  month: MonthsInput
 }
 
 input MonthsInput {
-    ene: PayEnum
-    feb: PayEnum
-    mar: PayEnum
-    abr: PayEnum
-    may: PayEnum
-    jun: PayEnum
-    jul: PayEnum
-    ago: PayEnum
-    sep: PayEnum
-    oct: PayEnum
-    nov: PayEnum
-    dec: PayEnum
+  ene: PayEnum
+  feb: PayEnum
+  mar: PayEnum
+  abr: PayEnum
+  may: PayEnum
+  jun: PayEnum
+  jul: PayEnum
+  ago: PayEnum
+  sep: PayEnum
+  oct: PayEnum
+  nov: PayEnum
+  dec: PayEnum
 }
 
 input AboDedInput {
-    refId: String
-    amount: Float
-    type: AboDedEnum
-    desc: String
-    state: AboDedStateEnum
-    createdAt: String
-    updatedAt: String
+  refId: String
+  amount: Float
+  type: AboDedEnum
+  desc: String
+  state: AboDedStateEnum
+  createdAt: String
+  updatedAt: String
 }
 
 input WAndLInput {
-    desc: String
-    amount: Float
-    createdAt: String
-    type: WAndLEnum
+  desc: String
+  amount: Float
+  createdAt: String
+  type: WAndLEnum
 }
 
 input FinancialStateInput {
-    state: Float
+  state: Float
 }
 
 input TagsInput {
-    TagName: String
+  TagName: String
 }
 
 type Query {
-    "devuelve los clientes"
-    getClients: [Client]
-    "retorna un cliente en especifico"
-    getClient(_id: ID!): Client
-    "retorna todos los contratos"
-    getContracts: [Contracts]
-    "devuelve un contrato para ser editado"
-    getContract(_id: ID!): Contracts
-    "devuelve un contrato en especifico que tiene una relacion con un cliente"
-    getContractRef(refId: String!): Contracts
-    "devuelve todos los esquemas de pagos mensuales"
-    getMonthPayments: [MonthPayments]
-    "devuelve un pago mensual en relacion con un contrato"
-    getMonthPayment(refId: String): MonthPayments
-    "devuelve todos los abonos y deudas"
-    getAboDeds: [AboDed]
-    "retorna todos los abonos y deudas de un cliente"
-    getAboDed(refId: String!): AboDed
-    "retorna las ganancias y gastos de la red"
-    getWandLs: [WAndL]
-    "retoran una ganancia/gasto"
-    getWandL(id: ID!): WAndL
-    "nos reatorna el dinero total de la empresa al momento"
-    getFinancialState: [FinancialState]
-    "retorna los tags de gastos"
-    getTags: [Tags]
-    "retorna un tag en especifico"
-    getTag(id: ID!): Tags
+  "devuelve los clientes"
+  getClients: [Client]
+  "retorna un cliente en especifico"
+  getClient(_id: ID!): Client
+  "retorna todos los contratos"
+  getContracts: [Contracts]
+  "devuelve un contrato para ser editado"
+  getContract(_id: ID!): Contracts
+  "devuelve un contrato en especifico que tiene una relacion con un cliente"
+  getContractRef(refId: String!): Contracts
+  "devuelve todos los esquemas de pagos mensuales"
+  getMonthPayments: [MonthPayments]
+  "devuelve un pago mensual en relacion con un contrato"
+  getMonthPayment(refId: String): MonthPayments
+  "devuelve todos los abonos y deudas"
+  getAboDeds: [AboDed]
+  "retorna todos los abonos y deudas de un cliente"
+  getAboDed(refId: String!): AboDed
+  "retorna las ganancias y gastos de la red"
+  getWandLs: [WAndL]
+  "retoran una ganancia/gasto"
+  getWandL(id: ID!): WAndL
+  "nos reatorna el dinero total de la empresa al momento"
+  getFinancialState: [FinancialState]
+  "retorna los tags de gastos"
+  getTags: [Tags]
+  "retorna un tag en especifico"
+  getTag(id: ID!): Tags
 }
 
 type Mutation {
-    "Crea un cliente"
-    createClient(input: ClientInput!): Client
-    "edita un cliente"
-    editClient(_id: ID!, input: ClientInput): Client
-    "crea un contrato"
-    createContract(input: ContractsInput): Contracts
-    "edita un contrato"
-    editContract(_id: ID!, input: ContractsInput): Contracts
-    "crea un pago mensual"
-    createMonthPayment(input: MonthPaymentsInput): MonthPayments
-    "edita un pago mensual"
-    editMonthPayment(_id: ID!, input: MonthPaymentsInput): MonthPayments
-    "creat un abono o una deuda"
-    createAboDed(input: AboDedInput): AboDed
-    "edita un abono o una deuda"
-    editAboDed(_id: ID!, input: AboDedInput): AboDed
-    "crea una ganancia o un gasto"
-    createWandL(input: WAndLInput): WAndL
-    "edita un gasto o una ganancia"
-    editWandL(_id: ID!, input: WAndLInput): WAndL
-    "crea el estado finaciero solo se debe utilizar una vez para no crear varios sino un valor unico"
-    createFinancialState(input: FinancialStateInput): FinancialState
-    "edita el estado finaciero"
-    editFinancialState(_id: ID!, input: FinancialStateInput): FinancialState
-    "crea un tag"
-    createTag(input: TagsInput): Tags
-    "edita un tag"
-    editTag(_id: ID!, input: TagsInput): Tags
+  "Crea un cliente"
+  createClient(input: ClientInput!): Client
+  "edita un cliente"
+  editClient(_id: ID!, input: ClientInput): Client
+  "crea un contrato"
+  createContract(input: ContractsInput): Contracts
+  "edita un contrato"
+  editContract(_id: ID!, input: ContractsInput): Contracts
+  "crea un pago mensual"
+  createMonthPayment(input: MonthPaymentsInput): MonthPayments
+  "edita un pago mensual"
+  editMonthPayment(_id: ID!, input: MonthPaymentsInput): MonthPayments
+  "creat un abono o una deuda"
+  createAboDed(input: AboDedInput): AboDed
+  "edita un abono o una deuda"
+  editAboDed(_id: ID!, input: AboDedInput): AboDed
+  "crea una ganancia o un gasto"
+  createWandL(input: WAndLInput): WAndL
+  "edita un gasto o una ganancia"
+  editWandL(_id: ID!, input: WAndLInput): WAndL
+  "crea el estado finaciero solo se debe utilizar una vez para no crear varios sino un valor unico"
+  createFinancialState(input: FinancialStateInput): FinancialState
+  "edita el estado finaciero"
+  editFinancialState(_id: ID!, input: FinancialStateInput): FinancialState
+  "crea un tag"
+  createTag(input: TagsInput): Tags
+  "edita un tag"
+  editTag(_id: ID!, input: TagsInput): Tags
 }

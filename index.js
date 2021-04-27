@@ -6,6 +6,8 @@ const { makeExecutableSchema } = require('graphql-tools')
 const { join } = require('path')
 const resolvers = require('./lib/resolvers')
 const cors = require('Cors')
+const fs = require('fs')
+const fileUpload = require('express-fileupload')
 
 //importar variables de entorno
 const {
@@ -21,6 +23,11 @@ const typeDefs = readFileSync(join(__dirname, 'lib', 'schema.graphql'), 'utf-8')
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 //declaramos los middlewares
+app.use(fileUpload({
+    uriDecodeFileNames: true
+}))
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
 
 app.use(cors())
 
@@ -30,10 +37,54 @@ app.use('/api', graphqlHTTP({
     graphiql: true
 }))
 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('hola como estas esta es la ruta raiz')
+})
+
+app.post('/upload',  function async (req, res) {
+    const { filename } = req.query
+    const relativePath = checkAndMakeDir(filename)
+
+    try {
+
+        if(!req.files) {
+            res.send({status: false, message: 'no file uploaded'})
+        }
+
+        var image = req.files.file
+        const savePath = `.${relativePath}/${filename}.jpg` 
+        
+        console.log(savePath)
+        image.mv(savePath)
+
+        res.send({
+            status: true,
+            message: 'file uploaded',
+            data: {
+                name: image.name,
+                mimetype: image.mimetype,
+                size: image.size
+            },
+            srcPath: savePath            
+        })
+
+    } catch (err) {
+        res.status(500).send(err)
+    }
 })
 
 app.listen(port, () => {
     console.log(`aplicacion corriendo en el puerto ${port}`)
 })
+
+
+const checkAndMakeDir = (directory) => {
+    const checkDir = fs.existsSync(`assets/${directory}`)
+
+    if(checkDir === false) {
+        fs.mkdir(`${__dirname}/assets/${directory}`, { recursive: true }, err => console.log(err))
+        return `/assets/${directory}`
+    }
+    
+    return `/assets/${directory}`
+}

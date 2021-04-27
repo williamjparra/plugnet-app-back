@@ -4,6 +4,8 @@
 ### dotenv ###
 .env
 
+assets/*
+
 ### Node ###
 # Logs
 logs
