@@ -8,6 +8,7 @@ const resolvers = require('./lib/resolvers')
 const cors = require('Cors')
 const fs = require('fs')
 const fileUpload = require('express-fileupload')
+const imageNameFormater = require('./utils/imageNameFormater')
 
 //importar variables de entorno
 const {
@@ -31,6 +32,8 @@ app.use(express.json())
 
 app.use(cors())
 
+app.use(express.static('assets'))
+
 app.use('/api', graphqlHTTP({
     schema: schema,
     rootValue: resolvers,
@@ -52,16 +55,16 @@ app.post('/upload',  function async (req, res) {
         }
 
         var image = req.files.file
-        const savePath = `.${relativePath}/${filename}.jpg` 
-        
-        console.log(savePath)
+        const imageName = imageNameFormater(filename, image.name)
+        const savePath = `.${relativePath}/${imageName}`
+
         image.mv(savePath)
 
         res.send({
             status: true,
             message: 'file uploaded',
             data: {
-                name: image.name,
+                name: imageName,
                 mimetype: image.mimetype,
                 size: image.size
             },
