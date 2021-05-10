@@ -1,3 +1,3 @@
-#añadir los querys y mutations para añadir la funcionalidad de buscar y almacenar archivos de clientes
-#añadir la logica para que los archivos se almacenes correctamente
-#identificar carpetas para los archivos y ordenarlas por user_id
+#añadir los querys y mutations para añadir la funcionalidad de buscar y almacenar archivos de clientes []
+#añadir la logica para que los archivos se almacenes correctamente [*]
+#identificar carpetas para los archivos y ordenarlas por user_id [*]

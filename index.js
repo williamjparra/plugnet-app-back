@@ -9,6 +9,7 @@ const cors = require('Cors')
 const fs = require('fs')
 const fileUpload = require('express-fileupload')
 const imageNameFormater = require('./utils/imageNameFormater')
+const auth = require('./services/authService')
 
 //importar variables de entorno
 const {
@@ -29,16 +30,39 @@ app.use(fileUpload({
 }))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-
 app.use(cors())
-
 app.use(express.static('assets'))
-
 app.use('/api', graphqlHTTP({
     schema: schema,
     rootValue: resolvers,
     graphiql: true
 }))
+
+//declaramos las rutas
+
+// las siguientes rutas son de testteo para funcionalidades
+app.post('/login', (req, res) => {
+    
+    const { user, password } = req.body 
+
+    const token = auth.loginService(user, password)
+    console.log(token)
+
+    res.json({
+        "message": "the token haas been send",
+        token
+    })
+})
+
+app.post('/verify', (req, res) => {
+    const token = req.body.token
+    const verifyToken = auth.authService(token)
+
+    res.send(JSON.stringify({
+        result: verifyToken
+    }))
+})
+//aqui terminan las rutas de testeo
 
 app.get('/', (req, res) => {
     res.send('hola como estas esta es la ruta raiz')
@@ -55,6 +79,8 @@ app.post('/upload',  function async (req, res) {
         }
 
         var image = req.files.file
+        //esta funcion recibe dos parametros uno "id del usuario al que pertenece" y 
+        //el nombre del archivo enviado para extraer la extension del mismo
         const imageName = imageNameFormater(filename, image.name)
         const savePath = `.${relativePath}/${imageName}`
 
