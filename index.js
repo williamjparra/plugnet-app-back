@@ -1,11 +1,10 @@
-const console = require('console');
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql')
 const { readFileSync } = require('fs')
 const { makeExecutableSchema } = require('graphql-tools')
 const { join } = require('path')
 const resolvers = require('./lib/resolvers')
-const cors = require('Cors')
+const cors = require('cors')
 const fs = require('fs')
 const fileUpload = require('express-fileupload')
 const imageNameFormater = require('./utils/imageNameFormater')
@@ -64,8 +63,8 @@ app.post('/verify', (req, res) => {
 })
 //aqui terminan las rutas de testeo
 
-app.get('/', (req, res) => {
-    res.send('hola como estas esta es la ruta raiz')
+app.get('/', (req, res) => { 
+    res.json({message: "hola"})
 })
 
 app.post('/upload',  function async (req, res) {

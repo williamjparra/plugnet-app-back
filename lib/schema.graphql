@@ -37,11 +37,13 @@ type Contact {
 
 type Contracts {
   _id: ID!
+  "este refID hace referencia a una lista de contactos"
   refId: String!
   location: String
   antenaModel: String
   ipAddress: String
-  parentMk: String
+  alias: String!
+  sector: String!
   billingData: Billing
   service: String
   servicePrice: Float
@@ -49,6 +51,23 @@ type Contracts {
   latLong: LatLong
   createdAt: String
   updatedAt: String
+}
+
+type Sector {
+  _id: ID!
+  alias: String!
+  LatLong: LatLong
+  ip: String!
+  antenaModel: String
+  parentMk: String!
+  contracts: [Contracts]
+}
+
+type borderRouter {
+  _id: ID!
+  name: String
+  ip: String
+  model: String
 }
 
 type Billing {
@@ -143,14 +162,29 @@ input ContractsInput {
   location: String
   antenaModel: String
   ipAddress: String
-  parentMk: String
+  alias: String!
+  sector: String!
   billingData: BillingInput
   service: String
   servicePrice: Float
-  router: RouterInput!
+  router: RouterInput
   latLong: LatLongInput
-  createdAt: String!
+  createdAt: String
   updatedAt: String
+}
+
+input SectorInput {
+  alias: String!
+  LatLong: LatLongInput!
+  ip: String!
+  antenaModel: String!
+  parentMk: String!
+}
+
+input borderRouterInput {
+  name: String
+  ip: String
+  model: String
 }
 
 input BillingInput {
@@ -229,6 +263,14 @@ type Query {
   getContracts: [Contracts]
   "devuelve un contrato para ser editado"
   getContract(_id: ID!): Contracts
+  "devuelve todos los sectores que tiene la red inalambrica"
+  getAllSectors: [Sector]
+  "devuelve un sector al que esta conectado al que se conectaran las antenas"
+  getSector(_id: ID!): Sector
+  "devuelve todos los routers de borde en los nodos"
+  getBorderRouters: [borderRouter]
+  "devuelve un Router de borde disponible en la red"
+  getBorderRouter(_id: ID!): borderRouter
   "devuelve un contrato en especifico que tiene una relacion con un cliente"
   getContractRef(refId: String!): Contracts
   "devuelve todos los esquemas de pagos mensuales"
@@ -260,6 +302,14 @@ type Mutation {
   createContract(input: ContractsInput): Contracts
   "edita un contrato"
   editContract(_id: ID!, input: ContractsInput): Contracts
+  "crea un sector nuevo"
+  createSector(input: SectorInput): Sector
+  "edita un 'Sector' inalambrico de la red"
+  editSector(_id: ID!, input: SectorInput): Sector
+  "Crea un Router de Borde para la red"
+  createBorderRouter(input: borderRouterInput): borderRouter
+  "Edita un router de borde de la red"
+  editBorderRouter(_id: ID!, input: borderRouterInput): borderRouter
   "crea un pago mensual"
   createMonthPayment(input: MonthPaymentsInput): MonthPayments
   "edita un pago mensual"
