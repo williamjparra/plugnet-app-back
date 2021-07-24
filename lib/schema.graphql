@@ -60,7 +60,6 @@ type Sector {
   ip: String!
   antenaModel: String
   parentMk: String!
-  contracts: [Contracts]
 }
 
 type borderRouter {
@@ -273,6 +272,8 @@ type Query {
   getBorderRouter(_id: ID!): borderRouter
   "devuelve un contrato en especifico que tiene una relacion con un cliente"
   getContractRef(refId: String!): Contracts
+  "devuelve todos los contratos asociados a un sector"
+  getClientsForSector(sector: String!): [Contracts]
   "devuelve todos los esquemas de pagos mensuales"
   getMonthPayments: [MonthPayments]
   "devuelve un pago mensual en relacion con un contrato"

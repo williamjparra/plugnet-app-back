@@ -9,6 +9,7 @@ const fs = require('fs')
 const fileUpload = require('express-fileupload')
 const imageNameFormater = require('./utils/imageNameFormater')
 const auth = require('./services/authService')
+const cookieParser = require('cookie-parser')
 
 //importar variables de entorno
 const {
@@ -27,14 +28,22 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 app.use(fileUpload({
     uriDecodeFileNames: true
 }))
+app.use(cookieParser())
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors())
-app.use(express.static('assets'))
+
+// la siguiente funcion maneja la utenticacion de la cookie para los usuarios
+app.use((req, res, next) => {
+    const token = req.cookies
+    next()
+})
+
+
 app.use('/api', graphqlHTTP({
     schema: schema,
     rootValue: resolvers,
-    graphiql: true
+    graphiql: true,
 }))
 
 //declaramos las rutas
